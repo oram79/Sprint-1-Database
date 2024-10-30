@@ -22,7 +22,7 @@ INSERT INTO Rentals (customer_id, movie_id, rental_date, return_date) VALUES
 (4, 4, '2024-10-10', '2024-10-17'),
 (5, 5, '2024-10-12', '2024-10-19'),
 (1, 2, '2024-10-14', '2024-10-21'),
-(2, 1, '2024-10-16', NULL), -- Made To Be Rented
+(2, 1s, '2024-10-16', NULL), -- Made To Be Rented
 (3, 2, '2024-10-17', '2024-10-7'),
 (4, 5, '2024-10-18', NULL), -- Made To Be Rented
 (5, 1, '2024-10-20', '2024-10-7');
