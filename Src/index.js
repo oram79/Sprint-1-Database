@@ -4,8 +4,8 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'postgres', //This _should_ be your username, as it's the default one Postgres uses
   host: 'localhost',
-  database: 'your_database_name', //This should be changed to reflect your actual database
-  password: 'your_database_password', //This should be changed to reflect the password you used when setting up Postgres
+  database: 'Movie-DataBase', //This should be changed to reflect your actual database
+  password: 'Sadie2011!', //This should be changed to reflect the password you used when setting up Postgres
   port: 5432,
 });
 
@@ -13,7 +13,35 @@ const pool = new Pool({
  * Creates the database tables, if they do not already exist.
  */
 async function createTable() {
-  // TODO: Add code to create Movies, Customers, and Rentals tables
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS customers (
+      movie_id SERIAL PRIMARY KEY,
+      title VARCHAR(225) NOT NULL,
+      release_year INT,
+      genre VARCHAR(50),
+      director VARCHAR(225)
+    );
+  `);
+
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS movies (
+      customer_id SERIAL PRIMARY KEY,
+      first_name VARCHAR(100),
+      last_name VARCHAR(100),
+      email VARCHAR(100) UNIQUE,
+      phone TEXT
+    );
+  `);
+
+  await db.query(`
+    CREATE TABLE IF NOT EXISTS rentals (
+      rental_id SERIAL PRIMARY KEY
+      customer_id INT REFERENCES Customers(customer_id),
+      movie_id INT REFERENCES Movies(movie_id),
+      rental_date DATE,
+      return_date DATE
+    );
+  `);
 };
 
 /**
