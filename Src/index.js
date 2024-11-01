@@ -1,11 +1,11 @@
+//////////////////////////////////////////////////
 const { Pool } = require('pg');
 
-// PostgreSQL connection
 const pool = new Pool({
-  user: 'postgres', //This _should_ be your username, as it's the default one Postgres uses
+  user: 'postgres',
   host: 'localhost',
-  database: 'Movie-DataBase', //This should be changed to reflect your actual database
-  password: 'Sadie2011!', //This should be changed to reflect the password you used when setting up Postgres
+  database: 'Movie-DataBase',
+  password: 'Sadie2011!',
   port: 5432,
 });
 
@@ -13,7 +13,7 @@ const pool = new Pool({
  * Creates the database tables, if they do not already exist.
  */
 async function createTable() {
-  await db.query(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS customers (
       movie_id SERIAL PRIMARY KEY,
       title VARCHAR(225) NOT NULL,
@@ -23,7 +23,7 @@ async function createTable() {
     );
   `);
 
-  await db.query(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS movies (
       customer_id SERIAL PRIMARY KEY,
       first_name VARCHAR(100),
@@ -33,7 +33,7 @@ async function createTable() {
     );
   `);
 
-  await db.query(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS rentals (
       rental_id SERIAL PRIMARY KEY
       customer_id INT REFERENCES Customers(customer_id),

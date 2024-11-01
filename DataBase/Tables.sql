@@ -16,7 +16,7 @@ phone TEXT
 
 CREATE TABLE Rentals (
 rental_id SERIAL PRIMARY KEY,
-customer_id INT REFERENCES Customers(customer_id),
+Customer_id INT REFERENCES Customers(customer_id),
 movie_id INT REFERENCES Movies(movie_id),
 rental_date DATE,
 return_date DATE
